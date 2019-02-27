@@ -11,9 +11,9 @@ One useful date-only operation is the calculation of the number of calendar days
 
 ### Background
 
-For many computational tasks, we want to manipulate dates&mdash;but only dates, without any time component, and without reference to any time zone. For example, in an Android app that displays the NASA Astronomy Picture of the Day (APOD), if we want to store retrieved APOD objects and images in local storage (database and/or file storage), the only date or time information that's relevant about each image is the date for which that image was the APOD. (You might also want to record a timestamp for when the image was retrieved, but that's not our concern at the moment.) Then, if you later want to search the local database for the APOD for a given day, using a time component in the search could result in database "misses"&mdash;i.e. queries that should return an APOD object, but don't.
+For many computational tasks, we want to manipulate dates&mdash;but only dates, without any time component, and without reference to any time zone. For example, in an Android app that displays the NASA Astronomy Picture of the Day (APOD), if we want to store retrieved APOD objects and images in local storage (database and/or file storage), the only date or time information that's relevant about each image is the date for which that image was the APOD. (You might also want to record a timestamp for when the image was retrieved, but that's not our concern at the moment.) On the other hand, if we store APOD objects in a database, using dates that contain time components, and we later search the database for the APOD object for some given day, a change in time-oriented configuration settings (such as the time zone of the device) could result in database "misses"&mdash;i.e. queries that should return an APOD object, but don't.
 
-The `java.time` package (added in Java 8) includes the `LocalDate` class for date-only computations; however, for Android development, the use of `java.time` requires API 26 or higher, which may be too restrictive for some projects. There are 3<sup>rd</sup>-party libraries, such as [Joda-Time](https://www.joda.org/joda-time/), which can be used when `java.time` isn't an option. However, such a library might be overkill for simple applications.
+The `java.time` package (added in Java 8) includes the `LocalDate` class for date-only computations; but for Android development, the use of `java.time` requires API 26 or higher, which may be too restrictive for some projects. There are 3<sup>rd</sup>-party libraries, such as [Joda-Time](https://www.joda.org/joda-time/), that can be used when `java.time` isn't an option. However, such a library might be overkill for simple applications.
 
 ### Implementation 
 
@@ -35,7 +35,7 @@ Thus, while a date preceding the advent of the Gregorian calendar (and even the 
 
 ### Assumptions
 
-* The `year` value will be a positive or negative `int` in the range stated above. 
+* The `year` value will be a positive or negative `int` in the range stated in ["Implementation"](#implementation), above. 
 
 * The `month` value will be in the range 0&hellip;11. This is in keeping with the convention followed in most C-derived languages and libraries, where months are numbered starting from 0.
 
@@ -92,7 +92,6 @@ For unit testing credit, use JUnit5 to verify your code with the following input
 
 * The number of days between January 1, 1970 and January 1 of some other year can be computing by multiplying the difference in years by 365, and then adding to that product the number of leap days between those 2 dates.
 
-
 ## Extra credit
 
 In the basic problem, the `year`, `month`, and `day` values will all be well-behaved&mdash;that is, each will be in the expected range. However, date computations often require normalization of non-normalized inputs. For example, we would treat month 12 of some year as actually being month 0 of the following year; similarly, January 32 would be considered February 1. We might even have negative values for `month` and `day`: July -2 should be treated as June 28, for example.
@@ -101,7 +100,7 @@ For extra credit, normalize the input data before making the elapsed day computa
 
 ### Unit tests
 
-For unit testing credit on the extra credit portion of the problem, use JUnit5 to verify your code with the following inputs and expected outputs:
+For unit testing credit on the extra credit portion of the problem, use JUnit5 to verify the correctness of your code with the following inputs and expected outputs:
 
 | `year` | `month` | `day` | `elapsedDays(year, month, day)` |
 |:------:|:-------:|:-----:|:-------------------------------:|

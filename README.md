@@ -9,9 +9,13 @@
 
 ## Basic task
 
+One useful date-only operation is the calculation of the number of calendar days between some agreed-upon starting date (for the sake of consistency, we'll use January 1, 1970 for this purpose) and a specified ending date. This is our basic task here.
+
+### Background
+
 For many computational tasks, we want to manipulate dates&mdash;but only dates, without any time component, and without reference to any time zone. For example, in an Android app that displays the NASA Astronomy Picture of the Day (APOD), if we want to store retrieved APOD objects and images in local storage (database and/or file storage), the only date or time information that's relevant about each image is the date for which that image was the APOD. (You might also want to record a timestamp for when the image was retrieved, but that's not our concern at the moment.) Then, if you later want to search the local database for the APOD for a given day, using a time component in the search could result in database "misses"&mdash;i.e. queries that should return an APOD object, but don't.
 
-For some applications, this leads us to the need to have a numeric representation of dates that is _not_ the number of milliseconds elapsed since 1970-01-01 00:00:00 UTC (the usual way we measure time in Java), but the number of calendar days since some agreed-upon date (for the sake of consistency, we'll keep using January 1, 1970 for this purpose). Computing this is the basic task in this assignment.
+The `java.time` package (added in Java 8) includes the `LocalDate` class for date-only computations; however, for Android development, the use of `java.time` requires API 26 or higher, which may be too restrictive for some projects. There are 3<sup>rd</sup>-party libraries, such as [Joda-Time](https://www.joda.org/joda-time/), which can be used when `java.time` isn't an option. However, such a library might be overkill for simple applications.
 
 ### Implementation 
 
@@ -23,7 +27,7 @@ int elapsedDays(int year, int month, int day)
 
 For more method declaration details, see the [Javadoc documentation](docs/api/edu/cnm/deepdive/util/DateOnly.html#elapsedDays-int-int-int-).
 
-For any specified ISO 8601-based date value in the range from (roughly) 5,880,000 BCE to 5,880,000 CE, your implementation should return the difference (in days) of that date and January 1, 1970. Dates after January 1, 1970 will result in positive differences, while dates before will result in negative differences.
+For any ISO 8601-based date value in the range from (roughly) 5,880,000 BCE to 5,880,000 CE, your implementation should return the difference (in days) between January 1, 1970 and the specified date. Dates after January 1, 1970 will result in positive differences, while dates before will result in negative differences.
 
 ### Historical calendars vs. ISO 8601
 
@@ -45,7 +49,9 @@ Thus, while a date preceding the advent of the Gregorian calendar (and even the 
 
 * To enable the use of the `elapsedDays` method in Android development projects, only Java 8 (or lower) syntax and standard library classes should be used.
 
-* To avoid explicit or implicit dependence on classes which incorporate time (in addition to date), or on classes not yet available on the majority of Android devices, implementations should not use the `java.util.Date` or `java.util.Calendar` classes (or any subclass of either), nor any classes in the `java.time` package.  
+* To avoid explicit or implicit dependence on classes which incorporate time (in addition to date), or on classes not yet available on the majority of Android devices, implementations should not use the `java.util.Date` or `java.util.Calendar` classes (or any subclass of either), nor any classes in the `java.time` package.
+
+* Your implementation should not depend on any 3<sup>rd</sup>-party libraries.
 
 ### Unit tests
 

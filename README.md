@@ -11,7 +11,7 @@ For some applications, this leads us to the need to have a numeric representatio
 Complete the implementation of the `edu.cnm.deepdive.util.DateOnly.elapsedDays` method, declared as:
 
 ```java
-public static int elapsedDays(int year, int month, int day)
+int elapsedDays(int year, int month, int day)
 ```
 
 For more method declaration details, see the [Javadoc documentation](docs/api/edu/cnm/deepdive/util/DateOnly.html#elapsedDays-int-int-int-).
@@ -33,6 +33,8 @@ For any given date value in the range from (roughly) 5,880,000 BCE to 5,880,000 
 ### Unit tests
 
 The accompanying `edu.cnm.deepdive.util.DateOnlyTest` class includes the `elapsedDaysNormalized` test method, which is the only test method you need to worry about for this part of the problem. This test is already written, and uses the accompanying `norm-tests.csv` file for its input and expected values.
+
+Note that the unit tests require not only the JUnit 5 Jupiter API library, but also the JUnit 5 Jupiter Params library. For more information, see the [JUnit Jupiter section](https://junit.org/junit5/docs/current/user-guide/#dependency-metadata-junit-jupiter) of the [Dependency Metadata appendix](https://junit.org/junit5/docs/current/user-guide/#dependency-metadata) to the [JUnit 5 User Guide](https://junit.org/junit5/docs/current/user-guide/).  
 
 ### Hints
 
@@ -65,3 +67,16 @@ For extra credit, normalize the input data before making the elapsed day computa
 ### Unit tests
 
 In the `edu.cnm.deepdive.util.DateOnlyTest` class, the `elapsedDaysNonNormalized` test method should be used to test input from the accompanying `non-norm-tests.csv` file; these inputs are all outside the expected ranges, in one way or another.
+
+Note that the unit tests require not only the JUnit 5 Jupiter API library, but also the JUnit 5 Jupiter Params library. For more information, see the [JUnit Jupiter section](https://junit.org/junit5/docs/current/user-guide/#dependency-metadata-junit-jupiter) of the [Dependency Metadata appendix](https://junit.org/junit5/docs/current/user-guide/#dependency-metadata) to the [JUnit 5 User Guide](https://junit.org/junit5/docs/current/user-guide/).  
+
+### Hints
+
+* Normalization should be done from the largest unit to the smallest. That is, normalize the `month` component of the date first, adjusting the `year` component as necessary; then, normalize the `day` component, adjusting the `month` and `year` components as necessary.
+
+* When normalizing the `day` component, one approach giving valid results is the following:
+
+    * While `day` is less than or equal to zero, subtract 1 from (and re-normalize) `month`, then add to `day` the numbers of days in the the resulting `month` for `year`.
+    
+    * While `day` is greater than the number of days in `month` for `year`, subtract the number of days in the month from `day`, increase `month` by 1, and re-normalize `month`.
+    

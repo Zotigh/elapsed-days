@@ -29,9 +29,9 @@ public class DateOnly {
    * target="_blank">ISO 8601 calendar</a> is assumed, and dates prior to 1583
    * (and even prior to 1 BCE) are supported.
    *
-   * @param year  year number in the ISO 8601 calendar.
-   * @param month month number, where 0=January, 1=February, etc.
-   * @param day   day number.
+   * @param year  ISO 8601 calendar year.
+   * @param month 0-based month number (0=January, 1=February, etc.).
+   * @param day   1-based day of month.
    * @return      difference in days between specified date and January 1, 1970.
    *              If the specified date is before January 1, 1970, a negative
    *              value is returned.

@@ -43,7 +43,7 @@ Thus, while a date preceding the advent of the Gregorian calendar (and even the 
 
 ### Restrictions
 
-* Because a key use case for the `elapsedDays` method is Android development, only Java 8 (or lower) syntax and standard library classes should be used.
+* To enable the use of the `elapsedDays` method in Android development projects, only Java 8 (or lower) syntax and standard library classes should be used.
 
 * To avoid explicit or implicit dependence on classes which incorporate time (in addition to date), or on classes not yet available on the majority of Android devices, implementations should not use the `java.util.Date` or `java.util.Calendar` classes (or any subclass of either), nor any classes in the `java.time` package.  
 
@@ -69,25 +69,24 @@ For unit testing credit, use JUnit5 to verify your code with the following input
 
 * The method to be completed includes a `TODO` comment to that effect.
 
-* Fundamentally, this problem can be broken down into 2 parts:
+* This problem can be solved in a number of ways; one relatively straightforward approach breaks it down into 2 parts:
 
     * Computing the number of days between January 1, 1970 and January 1 in the year specified by the `year` parameter. For a year prior to 1970, this should be a negative number.
 
     * Computing the number of days between January 1 in the year specified by `year`, and the date specified by `month` and `day` in that same year.
     
-    Implemented correctly, the sum of these 2 computations will give the correct overall answer.
+    The sum of the results of these 2 computations will give the correct overall answer.
     
 * In the IS0 8601 calendar, a leap year is defined as one which is
 
     * evenly divisible by 4, **and**
+    
         * _not_ divisible by 100, **or**
         * divisible by _400_.
         
     So, 1976 is a leap year (1976 is evenly divisible by 4, and not by 100), as is 2000 (evenly divisible by 4, and by 400); 2100, however, is not a leap year (2100 is evenly disivible by 4, and also by 100, but not by 400).
 
 * The number of days between January 1, 1970 and January 1 of some other year can be computing by multiplying the difference in years by 365, and then adding to that product the number of leap days between those 2 dates.
-
-    If the difference between the two years is negative, then the number of leap days (if not zero) should be treated as negative as well. For example, when computing the number of days between January 1, 1970 and January 1, 1973, the difference in years is 3, and the number of leap days is 1; the number of days is thus 3 * 365 + 1, or 1096. On the other hand, to compute the number of days between January 1, 1970, and January 1, 1968, we have a difference in years of -2, and 1 leap day between the two dates (February 29, 1968)&mdash;but the latter should also be treated as negative, for a total of -2 * 365 - 1, or -730 days.
 
 
 ## Extra credit: 5 points
@@ -109,11 +108,4 @@ For unit testing credit on the extra credit portion of the problem, use JUnit5 t
 
 ### Hints
 
-* Normalization should be done from the largest unit to the smallest. That is, normalize the `month` component of the date first, adjusting the `year` component as necessary; then, normalize the `day` component, adjusting the `month` and `year` components as necessary.
-
-* When normalizing the `day` component, one approach giving valid results is the following:
-
-    * While `day` is less than or equal to zero, subtract 1 from `month` (renormalizing `month` and adjusting `year`, as necessary), then add to `day` the numbers of days in the the resulting `month` for `year`.
-    
-    * While `day` is greater than the number of days in `month` for `year`, subtract the number of days in the month from `day`, increase `month` by 1, then re-normalize `month` and adjust `year`, as necessary.
-    
+* Normalization should be done from the largest unit to the smallest. That is, you should normalize the `month` component of the date first, adjusting the `year` component as necessary; then, normalize the `day` component, adjusting the `month` and `year` components as necessary.

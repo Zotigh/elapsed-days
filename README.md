@@ -11,7 +11,7 @@
 
 For many computational tasks, we want to manipulate dates&mdash;but only dates, without any time component, and without reference to any time zone. For example, in an Android app that displays the NASA Astronomy Picture of the Day (APOD), if we want to store retrieved APOD objects and images in local storage (database and/or file storage), the only date or time information that's relevant about each image is the date for which that image was the APOD. (You might also want to record a timestamp for when the image was retrieved, but that's not our concern at the moment.) Then, if you later want to search the local database for the APOD for a given day, using a time component in the search could result in database "misses"&mdash;i.e. queries that should return an APOD object, but don't.
 
-For some applications, this leads us to the need to have a numeric representation of dates that is _not_ the number of milliseconds elapsed since 1970-01-01 00:00:00 UTC (the usual way we measure time in Java), but the number of calendar days since some agreed-upon date (for the sake of consistency, we might as well use 1970-01-01 here again). Computing this is the basic task in this assignment.
+For some applications, this leads us to the need to have a numeric representation of dates that is _not_ the number of milliseconds elapsed since 1970-01-01 00:00:00 UTC (the usual way we measure time in Java), but the number of calendar days since some agreed-upon date (for the sake of consistency, we'll keep using January 1, 1970 for this purpose). Computing this is the basic task in this assignment.
 
 ### Implementation 
 
@@ -23,15 +23,23 @@ int elapsedDays(int year, int month, int day)
 
 For more method declaration details, see the [Javadoc documentation](docs/api/edu/cnm/deepdive/util/DateOnly.html#elapsedDays-int-int-int-).
 
-For any specified date value in the range from (roughly) 5,880,000 BCE to 5,880,000 CE, your implementation should return the numbers of days before (negative) or after (positive) January 1, 1970. This computation will use the [ISO 8601 calendar](https://en.wikipedia.org/wiki/ISO_8601#Years), in which the current rules for leap days are applied not only going forward in time, but also back, prior to the dates when those rules were adopted (with the Gregorian calendar), and even prior to the adoption of the Julian calendar. (Note that this is _not_ the behavior employed by any subclass of `java.util.Calendar` in the Java standard library.) Thus, while dates preceding the advent of the Gregorian calendar may be employed in the ISO 8601 calendar standard, and specified as arguments to the `elapsedDays` method, these dates will not correspond directly to Julian calendar dates. (Of course, the situation worsens if ISO 8601 calendar dates prior to the advent of the Julian calendar are used.)
+For any specified date value in the range from (roughly) 5,880,000 BCE to 5,880,000 CE, your implementation should return the numbers of days before (negative) or after (positive) January 1, 1970 that the specified ISO 8601-based date represents.
+
+### Historical note
+
+The Gregorian calendar we use has only been around for the last 440 years or so; much less than that in many countries (including the US). Before that, the Julian calendar (dating from 45 BCE, with the quadrennial leap year rule formalized in 4 CE) was used in most of the European-dominated parts of the world. The Julian calendar had the same months as the Gregorian calendar, but used a leap year rule that resulted in the accumulation of an excess of ~10 leap days over 1500 years, motivating the changeover to the Gregorian calendar. Rather than deal with that changeover&mdash;and with the lack of a year 0 in either the Julian or the proleptic Gregorian calendars&mdash;we'll be following the [ISO 8601 standard](https://en.wikipedia.org/wiki/ISO_8601#Years), with explicit support not only for years prior to 1583, but years prior to 1 CE (or AD) as well. (The year traditionally referred to as 1 BCE, or 1 BC, is denoted as year 0 of the ISO 8601 calendar.)
+
+Thus, while a date preceding the advent of the Gregorian calendar (and even the Julian calendar) may be specified as the `year`, `month`, and `day` arguments to the `elapsedDays` method, those values will not match the historic year, month, and day denoting the same day on the calendar(s) actually in use then. (They will also differ from the `java.util.Calendar`-based values, since `java.util.GregorianCalendar`, the concrete extension of `java.util.Calendar`, uses the Julian calendar for dates prior to October 15, 1582.)
 
 ### Assumptions
 
-* The `year` value will be a positive or negative `int` in the range given above. Obviously, the Gregorian calendar we use has only been around for the last 500 years or so; much less than that in many countries (including the US). Before that, the Julian calendar was used in most of the European-dominated parts of the world; it had the same months as the Gregorian calendar, but had included too many leap days over the years. Rather than deal with that changeover&mdash;and with the lack of a year 0 in either the Julian or Gregorian calendars&mdash;we'll be following the [ISO 8601 standard](https://en.wikipedia.org/wiki/ISO_8601#Years), with the added explicit requirement to support not only years prior to 1583, but years prior to 1 CE (or AD), as well, with the year traditionally referred to as 1 BCE (or 1 BC) denoted as year 0 of the ISO 8601 calendar.
+* The `year` value will be a positive or negative `int` in the range stated above. 
 
 * The `month` value will be in the range 0&hellip;11. This is in keeping with the convention followed in most C-derived languages and libraries, where months are numbered starting from 0.
 
-* The `day` value will be in the range 1&hellip;(last day of `month` in specified `year`).
+* The `day` value will be in the range from 1 to the last day of `month` in `year`.
+
+* Together, the 3 arguments above will specify a date falling in the range beginning 2<sup>31</sup> days before January 1, 1970, and ending (2<sup>31</sup> - 1) days after that date. Your implementation is not required to behave in any predictable fashion for dates outside that range, nor to detect and handle such conditions in any way.
 
 ### Restrictions
 

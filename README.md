@@ -25,9 +25,9 @@ For more method declaration details, see the [Javadoc documentation](docs/api/ed
 
 For any specified ISO 8601-based date value in the range from (roughly) 5,880,000 BCE to 5,880,000 CE, your implementation should return the difference (in days) of that date and January 1, 1970. Dates after January 1, 1970 will result in positive differences, while dates before will result in negative differences.
 
-### Historical calendars vs. ISO 8601.
+### Historical calendars vs. ISO 8601
 
-The Gregorian calendar we use has only been around for the last 440 years or so; much less than that in many countries (including the US). Before that, the Julian calendar (dating from 45 BCE, with the quadrennial leap year rule formalized in 4 CE) was used in most of the European-dominated parts of the world. The Julian calendar had the same months as the Gregorian calendar, but used a leap year rule that resulted in the accumulation of an excess of ~10 leap days over 1500 years, motivating the changeover to the Gregorian calendar. Rather than deal with that changeover&mdash;and with the lack of a year 0 in either the Julian or the proleptic Gregorian calendars&mdash;we'll be following the [ISO 8601 standard](https://en.wikipedia.org/wiki/ISO_8601#Years), with explicit support not only for years prior to 1583, but years prior to 1 CE (or AD) as well. (The year traditionally referred to as 1 BCE, or 1 BC, is denoted as year 0 of the ISO 8601 calendar.)
+The Gregorian calendar we use has only been around for the last 440 years or so&mdash;much less than that in many countries (including the US). Before that, the Julian calendar (dating from 45 BCE, with the quadrennial leap year rule formalized in 4 CE) was used in most of the European-dominated regions of the world. The Julian calendar had the same months as the Gregorian calendar, but used a leap year rule that resulted in the accumulation of an excess of ~10 leap days over 1500 years, motivating the changeover to the Gregorian calendar. Rather than deal with that changeover&mdash;and with the lack of a year 0 in either the Julian or the proleptic Gregorian calendars&mdash;we'll be following the [ISO 8601 standard](https://en.wikipedia.org/wiki/ISO_8601#Years), with explicit support not only for years prior to 1583, but years prior to 1 CE (or AD) as well. (The year traditionally referred to as 1 BCE, or 1 BC, is denoted as year 0 of the ISO 8601 calendar.)
 
 Thus, while a date preceding the advent of the Gregorian calendar (and even the Julian calendar) may be specified as the `year`, `month`, and `day` arguments to the `elapsedDays` method, those values will not match the historic year, month, and day denoting the same day on the calendar(s) actually in use then. (They will also differ from the `java.util.Calendar`-based values, since `java.util.GregorianCalendar`, the concrete extension of `java.util.Calendar`, uses the Julian calendar for dates prior to October 15, 1582.)
 
@@ -39,7 +39,7 @@ Thus, while a date preceding the advent of the Gregorian calendar (and even the 
 
 * The `day` value will be in the range from 1 to the last day of `month` in `year`.
 
-* Together, the 3 arguments above will specify a date falling in the range beginning 2<sup>31</sup> days before January 1, 1970, and ending (2<sup>31</sup> - 1) days after that date. Your implementation is not required to behave in any predictable fashion for dates outside that range, nor to detect and handle such conditions in any way.
+* Together, the 3 arguments above will specify a date falling in the range beginning 2<sup>31</sup> days before January 1, 1970, and ending (2<sup>31</sup> - 1) days after that date. Your implementation is not required to behave in any predictable fashion for dates outside that range.
 
 ### Restrictions
 

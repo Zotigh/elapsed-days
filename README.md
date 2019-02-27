@@ -82,7 +82,7 @@ For unit testing credit, use JUnit5 to verify your code with the following input
     * evenly divisible by 4, **and**
     
         * _not_ divisible by 100, **or**
-        * divisible by _400_.
+        * divisible by 400.
         
     So, 1976 is a leap year (1976 is evenly divisible by 4, and not by 100), as is 2000 (evenly divisible by 4, and by 400); 2100, however, is not a leap year (2100 is evenly disivible by 4, and also by 100, but not by 400).
 

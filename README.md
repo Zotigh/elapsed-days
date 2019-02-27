@@ -14,6 +14,8 @@ Complete the implementation of the `edu.cnm.deepdive.util.DateOnly.elapsedDays` 
 public static int elapsedDays(int year, int month, int day)
 ```
 
+For more method declaration details, see the [Javadoc documentation](docs/api/edu/cnm/deepdive/util/DateOnly.html#elapsedDays-int-int-int-).
+
 For any given date value in the range from (roughly) 5,880,000 BCE to 5,880,000 CE, your implementation should return the numbers of days before (negative) or after (positive) January 1, 1970.
 
 ### Details

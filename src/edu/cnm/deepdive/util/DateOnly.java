@@ -17,6 +17,12 @@ package edu.cnm.deepdive.util;
 public class DateOnly {
 
 
+  private DateOnly() {
+    // NOTE: There is NO need to do anything with this constructor! The method
+    //       you will implement in this class are static; thus, there is no need
+    //       to create instances of this class.
+  }
+
   /**
    * Computes and returns the number of days between January 1, 1970 and the
    * specified date. The <a href="https://en.wikipedia.org/wiki/ISO_8601#Years"

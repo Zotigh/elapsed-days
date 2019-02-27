@@ -7,11 +7,11 @@
 
 ## Basic task
 
-One useful date-only operation is the calculation of the number of calendar days between some agreed-upon starting date and a specified ending date; this is your task here.
+One useful date-only operation is the calculation of the difference in days between some agreed-upon starting date and a specified ending date; this is your task here.
 
 ### Background
 
-For many computational tasks, we want to manipulate dates&mdash;but only dates, without any time component, and without reference to any time zone. For example, in an Android app that displays the NASA Astronomy Picture of the Day (APOD), if we want to store retrieved APOD objects and images in local storage (database and/or file storage), the only date or time information that's relevant about each image is the date for which that image was the APOD. (You might also want to record a timestamp for when the image was retrieved, but that's not our concern at the moment.) On the other hand, if we store APOD objects in a database, using dates that contain time components, and we later search the database for the APOD object for some given day, a change in time-oriented configuration settings (such as the time zone of the device) could result in database "misses"&mdash;i.e. queries that should return an APOD object, but don't.
+In some computational tasks, we need to manipulate dates&mdash;but only dates, without time components, and without reference to a time zone. For example, in an Android app that displays the NASA Astronomy Picture of the Day (APOD), if we want to store retrieved APOD objects and images in local storage (database and/or file storage), the only date or time information that's relevant about each image is the date for which that image was the APOD. (You might also want to record a timestamp for when the image was retrieved, but that's not our concern at the moment.) On the other hand, if we store APOD objects in a database, using dates that contain time components, and we later search the database for the APOD object for some given day, a change in time-oriented configuration settings (such as the time zone of the device) could result in database "misses"&mdash;i.e. queries that should return an APOD object, but don't.
 
 The `java.time` package (added in Java 8) includes the `LocalDate` class for date-only computations; but for Android development, the use of `java.time` requires API 26 or higher, which may be too restrictive for some projects. There are 3<sup>rd</sup>-party libraries, such as [Joda-Time](https://www.joda.org/joda-time/), that can be used when `java.time` isn't an option. However, such a library might be overkill for simple applications.
 

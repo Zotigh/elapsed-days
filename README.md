@@ -1,5 +1,3 @@
-# Date-only Calculations
-
 ## Value
 
 * Basic implementation: 15 points
@@ -9,7 +7,7 @@
 
 ## Basic task
 
-One useful date-only operation is the calculation of the number of calendar days between some agreed-upon starting date (for the sake of consistency, we'll use January 1, 1970 for this purpose) and a specified ending date. This is our basic task here.
+One useful date-only operation is the calculation of the number of calendar days between some agreed-upon starting date and a specified ending date. That is our basic task here.
 
 ### Background
 

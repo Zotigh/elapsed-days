@@ -77,7 +77,7 @@ For unit testing credit, use JUnit5 to verify your code with the following input
     
     The sum of the results of these 2 computations will give the correct overall answer.
     
-* In the IS0 8601 calendar, a leap year is defined as one which is
+* In the Gregorian and IS0 8601 calendars, a leap year is defined as one which is
 
     * evenly divisible by 4, **and**
     

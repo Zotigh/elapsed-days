@@ -2,7 +2,7 @@
 
 ## Value
 
-* Basic implementation: 10 points
+* Basic implementation: 15 points
 * Basic unit tests: 5 points
 * Extra credit implementation: 10 points
 * Extra credit unit tests: 5 points

@@ -23,9 +23,9 @@ int elapsedDays(int year, int month, int day)
 
 For more method declaration details, see the [Javadoc documentation](docs/api/edu/cnm/deepdive/util/DateOnly.html#elapsedDays-int-int-int-).
 
-For any specified date value in the range from (roughly) 5,880,000 BCE to 5,880,000 CE, your implementation should return the numbers of days before (negative) or after (positive) January 1, 1970 that the specified ISO 8601-based date represents.
+For any specified ISO 8601-based date value in the range from (roughly) 5,880,000 BCE to 5,880,000 CE, your implementation should return the difference (in days) of that date and January 1, 1970. Dates after January 1, 1970 will result in positive differences, while dates before will result in negative differences.
 
-### Historical note
+### Historical calendars vs. ISO 8601.
 
 The Gregorian calendar we use has only been around for the last 440 years or so; much less than that in many countries (including the US). Before that, the Julian calendar (dating from 45 BCE, with the quadrennial leap year rule formalized in 4 CE) was used in most of the European-dominated parts of the world. The Julian calendar had the same months as the Gregorian calendar, but used a leap year rule that resulted in the accumulation of an excess of ~10 leap days over 1500 years, motivating the changeover to the Gregorian calendar. Rather than deal with that changeover&mdash;and with the lack of a year 0 in either the Julian or the proleptic Gregorian calendars&mdash;we'll be following the [ISO 8601 standard](https://en.wikipedia.org/wiki/ISO_8601#Years), with explicit support not only for years prior to 1583, but years prior to 1 CE (or AD) as well. (The year traditionally referred to as 1 BCE, or 1 BC, is denoted as year 0 of the ISO 8601 calendar.)
 

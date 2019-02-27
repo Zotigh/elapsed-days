@@ -38,7 +38,15 @@ Note that the unit tests require not only the JUnit 5 Jupiter API library, but a
 
 ### Hints
 
-* As discussed in class, this problem can be broken down into 2 parts:
+* The method to be completed is `static`; there is no need to create instances of `DateOnly` (and arguably no benefit in doing so).
+
+* You may find it useful to create one or more additional `static` methods as "helpers"; the problem can be solved without doing so, however.
+
+* Don't hesitate to declare any constants (`static final` fields) that you feel might simplify or clarify your code.
+
+* The method to be completed includes a `TODO` comment to that effect.
+
+* Fundamentally, this problem can be broken down into 2 parts:
 
     * Computing the number of days between January 1, 1970 and January 1 in the year specified by the `year` parameter. For a year prior to 1970, this should be a negative number.
 
@@ -57,6 +65,7 @@ Note that the unit tests require not only the JUnit 5 Jupiter API library, but a
 * The number of days between January 1, 1970 and January 1 of some other year can be computing by multiplying the difference in years by 365, and then adding to that product the number of leap days between those 2 dates.
 
     If the difference between the two years is negative, then the number of leap days (if not zero) should be treated as negative as well. For example, when computing the number of days between January 1, 1970 and January 1, 1973, the difference in years is 3, and the number of leap days is 1; the number of days is thus 3 * 365 + 1, or 1096. On the other hand, to compute the number of days between January 1, 1970, and January 1, 1968, we have a difference in years of -2, and 1 leap day between the two dates (February 29, 1968)&mdash;but the latter should also be treated as negative, for a total of -2 * 365 - 1, or -730 days.
+
 
 ## Extra credit: 5 points
 

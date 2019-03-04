@@ -36,8 +36,25 @@ public class DateOnly {
    *              If the specified date is before January 1, 1970, a negative
    *              value is returned.
    */
-  public static int elapsedDays(int year, int month, int day) {
-    return 0; // TODO Implement this method as specified in README.
+  public static int elapsedDays(int day, int month, int year) {
+
+    final int DAYS_IN_A_YEAR = 365;
+    final int START_YEAR = 1970;
+    int days = 0;
+
+    int yearDays = (year - START_YEAR) * DAYS_IN_A_YEAR;
+    days += yearDays + monthDays(month) + day;
+
+    return days;
+
+  }
+
+  private static int monthDays(int month) {
+    return month * 30;
+  }
+
+  public static boolean isLeapYear(int year) {
+    return ((year % 4 == 0) && (year % 100 != 0 || year % 400 == 0));
   }
 
 }
